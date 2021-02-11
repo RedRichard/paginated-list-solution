@@ -14,9 +14,13 @@ function TextsIndex({ currentPageNum, currentPageSize }) {
   const pageSize = currentPageSize;
 
   useEffect(() => {
-    Axios.get("http://localhost:9000/texts/", {
-      params: { pageNum, pageSize },
-    })
+    Axios.get(
+      (process.env.REACT_APP_BACKEND_URL || "http://localhost:9000/") +
+        "texts/",
+      {
+        params: { pageNum, pageSize },
+      }
+    )
       .then((res) => {
         console.log(res.data);
         setTexts(res.data);
