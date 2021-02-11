@@ -11,7 +11,7 @@ import TextCard from "./TextCard";
 function TextsIndex({ currentPageNum, currentPageSize }) {
   const [texts, setTexts] = useState([]);
   const [pageNum, setPageNum] = useState(currentPageNum);
-  const [pageSize, setPageSize] = useState(currentPageSize);
+  const pageSize = currentPageSize;
 
   useEffect(() => {
     Axios.get("http://localhost:9000/texts/", {
@@ -24,7 +24,7 @@ function TextsIndex({ currentPageNum, currentPageSize }) {
       .catch((err) => {
         console.log(err);
       });
-  }, [pageNum]);
+  }, [pageNum, pageSize]);
 
   const textList = () => {
     return texts.map((currentText, i) => {
@@ -32,9 +32,14 @@ function TextsIndex({ currentPageNum, currentPageSize }) {
     });
   };
 
-  const changePage = (e) => {
+  const changePageForward = (e) => {
     e.preventDefault();
     setPageNum(pageNum + 1);
+  };
+
+  const changePageBack = (e) => {
+    e.preventDefault();
+    setPageNum(pageNum - 1);
   };
 
   return (
@@ -46,17 +51,21 @@ function TextsIndex({ currentPageNum, currentPageSize }) {
       <br />
       <Row className="justify-content-md-center">
         <Col xs lg="1" className="text-right">
-          <Button variant="link" size="sm">
-            Previous
-          </Button>
+          {pageNum > 1 && (
+            <Button variant="link" size="sm" onClick={changePageBack}>
+              Previous
+            </Button>
+          )}
         </Col>
         <Col md="auto" className="text-center">
           {pageNum}
         </Col>
         <Col xs lg="1" className="text-left">
-          <Button variant="link" size="sm" onClick={changePage}>
-            Next
-          </Button>
+          {texts.length === pageSize && (
+            <Button variant="link" size="sm" onClick={changePageForward}>
+              Next
+            </Button>
+          )}
         </Col>
       </Row>
     </Container>
