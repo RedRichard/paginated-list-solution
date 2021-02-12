@@ -13,13 +13,13 @@ mongoose.set("useUnifiedTopology", true);
 mongoose.set("useNewUrlParser", true);
 
 // Connection to database:
-mongoose.connect(
-  `${process.env.NODEJS_MONGODB_SCHEME}://${process.env.NODEJS_MONGODB_USERNAME}:${process.env.NODEJS_MONGODB_PASSWORD}@${process.env.NODEJS_MONGODB_SERVICE_PORT}`,
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  }
-);
+const mongodbUrl = process.env.NODEJS_MONGODB_SERVICE_PORT
+  ? `${process.env.NODEJS_MONGODB_SCHEME}://${process.env.NODEJS_MONGODB_USERNAME}:${process.env.NODEJS_MONGODB_PASSWORD}@${process.env.NODEJS_MONGODB_SERVICE_PORT}`
+  : "mongodb://localhost/paginated_list_solution";
+mongoose.connect(mongodbUrl, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 // Make Mongoose use `findOneAndUpdate()`. Note that this option is `true`
 // by default, you need to set it to false.
 mongoose.set("useFindAndModify", false);
