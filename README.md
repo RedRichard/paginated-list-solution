@@ -2,6 +2,12 @@
 
 A MERN stack app that allows access to the blog entries in a Mongo DB through pages, only requesting the necessary amount of entried to the backend server.
 
+**Main page**
+
+<img src="https://github.com/RedRichard/paginated-list-solution/blob/master/images/paginated-solution-main-screen.png" width="600"/>
+
+The buttons at the bottom of the blog entries allow the user to change pages.
+
 ## Docker
 
 To run the app use the **docker-compose.yaml** file.
