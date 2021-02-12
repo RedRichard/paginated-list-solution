@@ -20,7 +20,7 @@ services:
       ME_CONFIG_MONGODB_SERVER: mongodb
 
   nodejs-backend:
-    image: paginated-list-backend:1.0
+    image: redrichard/paginated-list-backend:1.0
     ports:
       - 9000:9000
     depends_on:
@@ -33,7 +33,7 @@ services:
       NODEJS_MONGODB_SERVICE_PORT: mongodb:27017
 
   react-frontend:
-    image: paginated-list-frontend:1.0
+    image: redrichard/paginated-list-frontend:1.0
     tty: true
     ports:
       - 3000:3000
